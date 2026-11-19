@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff8f5" />
+    <meta name="description" content="Konyalı Hacı Usta menüsünde yemeklerin gramajını, içeriğini ve besin bilgilerini inceleyin." />
+    <title>Konyalı Hacı Usta | QR Menü</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="theme.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell" id="top">
+      <header class="app-header">
+        <a class="brand" href="#top" aria-label="Konyalı Hacı Usta menü ana sayfa">
+          <img src="assets/logo.png" alt="Konyalı Hacı Usta" />
+        </a>
+        <div class="header-center"><strong>Kebap · Pide · Izgara</strong><small>Gramaj ve besin bilgileri</small></div>
+        <div class="header-copy"><strong>İçeriğini bil,<br />afiyetle seç</strong><small>MENÜ · GRAMAJ · BESİN</small></div>
+      </header>
+      <main>
+        <label class="search-box"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="Yemek veya içerik ara" autocomplete="off" aria-label="Yemek veya içerik ara" /></label>
+        <section class="campaign-hero" aria-label="Menüden seçmeler">
+          <img src="assets/campaign-hero.jpg" alt="Menüden seçmeler için temsili yemek görseli" />
+          <div class="campaign-copy"><span>MENÜDEN SEÇMELER</span><b>Lezzetini keşfet</b><small>İçerik ve besin notlarını incele.</small></div>
+        </section>
+        <div class="result-line"><span id="result-count"></span></div>
+        <section class="menu-section" aria-label="Yemekler">
+          <div class="menu-grid" id="menu-grid" aria-live="polite"></div>
+          <div class="empty-state" id="empty-state" hidden><span>⌕</span><h3>Bu aramayla eşleşen yemek yok</h3><p>Başka bir yemek ya da içerik adı deneyin.</p><button id="clear-filters">Aramayı temizle</button></div>
+        </section>
+        <footer class="footer"><img class="footer-logo" src="assets/logo.png" alt="" /><p>İçeriğini bilerek seç, afiyetle ye.</p><span>Besin değerleri tahminidir; tarife göre değişebilir.</span></footer>
+      </main>
+    </div>
+  </body>
+</html>
