@@ -1,50 +1,72 @@
 const dishes = [
-  {id:'adana',name:'Adana Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',ingredients:[['Kuzu kıyma','29 g'],['Kuyruk yağı','20 g'],['Pul biber','20 g'],['Tuz','3 g'],['Kapya biber','10 g']]},
-  {id:'urfa',name:'Urfa Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g']]},
-  {id:'ali-nazik',name:'Ali Nazik',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g'],['Tereyağı','20 g'],['Domates sosu','30 g'],['Patlıcan','100 g'],['Yoğurt','100 g']]},
-  {id:'yogurtlu-kebap',name:'Yoğurtlu Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g'],['Tereyağı','20 g'],['Domates sosu','30 g'],['Pide','120 g'],['Yoğurt','100 g']]},
-  {id:'patlican-kebap',name:'Patlıcan Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',ingredients:[]},
-  {id:'sarma-beyti',name:'Sarma Beyti',category:'Kebap & Izgara',emoji:'♨',portion:'300 g pişmiş servis',ingredients:[['Tuz','3 g'],['Kapya biber','10 g'],['Kuyruk yağı','20 g'],['Dana kıyma','58 g'],['Kuzu kıyma','58 g'],['Lavaş','180 g'],['Tereyağı','20 g'],['Salça sos','30 g']]},
-  {id:'kofte',name:'Köfte',category:'Kebap & Izgara',emoji:'♨',portion:'300 g pişmiş servis',ingredients:[['Ekmek','10 g'],['Soğan','5 g'],['Dana kıyma','90 g'],['Kuzu kıyma','90 g']]},
-  {id:'tavuk-sis',name:'Tavuk Şiş',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',ingredients:[['Tuz','5 g'],['Domates salçası','10 g'],['Sıvı yağ','5 g'],['Toz biber','5 g'],['Pul biber','3 g'],['Tavuk','222 g']]},
-  {id:'kanat',name:'Tavuk Kanat',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',ingredients:[['Tuz','5 g'],['Domates salçası','10 g'],['Sıvı yağ','5 g'],['Toz biber','5 g'],['Pul biber','3 g'],['Tavuk kanat','222 g']]},
-  {id:'cop-sis',name:'Et Çöp Şiş',category:'Kebap & Izgara',emoji:'♨',portion:'300 g pişmiş servis',ingredients:[['Tuz','3 g'],['Toz biber','3 g'],['Sıvı yağ','3 g'],['Kuyruk yağı','40 g'],['Dana eti','250 g']]},
-  {id:'tandir',name:'Tandır',category:'Kebap & Izgara',emoji:'♨',portion:'130 g pişmiş servis',ingredients:[['Tuz','5 g'],['Kuzu kol','125 g']]},
-  {id:'etli-ekmek',name:'Etli Ekmek',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',ingredients:[['Kıyma','120 g'],['Döner','80 g'],['Biber','40 g'],['Soğan','35 g'],['Hamur','200 g'],['Tuz','5 g']]},
-  {id:'bicak-arasi',name:'Bıçak Arası',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',ingredients:[['Kıyma','100 g'],['Döner','90 g'],['Biber','40 g'],['Kuyruk yağı','50 g'],['Tuz','5 g'],['Sıvı yağ','10 g'],['Hamur','200 g']]},
-  {id:'mevlana',name:'Mevlana',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',ingredients:[['Peynir','30 g'],['Biber','40 g'],['Soğan','35 g'],['Hamur','200 g'],['Tuz','5 g']]},
-  {id:'lahmacun',name:'Lahmacun',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',ingredients:[['Kıyma','120 g'],['Domates','90 g'],['Biber','40 g'],['Soğan','35 g'],['Sarımsak','5 g'],['İsot','10 g'],['Maydanoz','10 g'],['Tuz','5 g']]},
-  {id:'kasarli-pide',name:'Kaşarlı Pide',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',ingredients:[]},
-  {id:'peynirli-pide',name:'Peynirli Pide (Börek)',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',ingredients:[['Peynir','120 g'],['Kaşar','40 g']]},
-  {id:'bamya',name:'Bamya',category:'Çorba & Başlangıç',emoji:'◒',portion:'200 g pişmiş servis',ingredients:[]},
-  {id:'kelle-paca',name:'Kelle Paça',category:'Çorba & Başlangıç',emoji:'◒',portion:'100 g pişmiş servis',ingredients:[]},
-  {id:'mercimek',name:'Mercimek',category:'Çorba & Başlangıç',emoji:'◒',portion:'100 g pişmiş servis',ingredients:[]},
-  {id:'icli-kofte',name:'İçli Köfte',category:'Çorba & Başlangıç',emoji:'◒',portion:'80 g pişmiş servis',ingredients:[]}
+  {id:'adana',name:'Adana Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','48 g'],['Kuzu kıyma','49 g'],['Kuyruk yağı','20 g'],['Pul biber','20 g'],['Tuz','3 g'],['Kapya biber','10 g']]},
+  {id:'urfa',name:'Urfa Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g']]},
+  {id:'ali-nazik',name:'Ali Nazik',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g'],['Tereyağı','20 g'],['Domates sosu','30 g'],['Patlıcan','100 g'],['Yoğurt','100 g']]},
+  {id:'yogurtlu-kebap',name:'Yoğurtlu Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g'],['Tereyağı','20 g'],['Domates sosu','30 g'],['Pide','120 g'],['Yoğurt','100 g']]},
+  {id:'patlican-kebap',name:'Patlıcan Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',recipeComplete:false,ingredients:[]},
+  {id:'sarma-beyti',name:'Sarma Beyti',category:'Kebap & Izgara',emoji:'♨',portion:'300 g pişmiş servis',recipeComplete:true,ingredients:[['Tuz','3 g'],['Kapya biber','10 g'],['Kuyruk yağı','20 g'],['Dana kıyma','58 g'],['Kuzu kıyma','58 g'],['Lavaş','180 g'],['Tereyağı','20 g'],['Salça sos','30 g']]},
+  {id:'kofte',name:'Köfte',category:'Kebap & Izgara',emoji:'♨',portion:'300 g pişmiş servis',recipeComplete:true,ingredients:[['Tuz','5 g'],['Ekmek','10 g'],['Soğan','5 g'],['Dana kıyma','90 g'],['Kuzu kıyma','90 g']]},
+  {id:'tavuk-sis',name:'Tavuk Şiş',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',recipeComplete:true,ingredients:[['Tuz','5 g'],['Domates salçası','10 g'],['Sıvı yağ','5 g'],['Toz biber','5 g'],['Pul biber','3 g'],['Tavuk but','222 g']]},
+  {id:'kanat',name:'Tavuk Kanat',category:'Kebap & Izgara',emoji:'♨',portion:'250 g pişmiş servis',recipeComplete:true,ingredients:[['Tuz','5 g'],['Domates salçası','10 g'],['Sıvı yağ','5 g'],['Toz biber','5 g'],['Pul biber','3 g'],['Tavuk kanat','222 g']]},
+  {id:'cop-sis',name:'Et Çöp Şiş',category:'Kebap & Izgara',emoji:'♨',portion:'300 g pişmiş servis',recipeComplete:true,ingredients:[['Tuz','3 g'],['Toz biber','3 g'],['Sıvı yağ','3 g'],['Kuyruk yağı','40 g'],['Dana eti','250 g']]},
+  {id:'tandir',name:'Tandır',category:'Kebap & Izgara',emoji:'♨',portion:'130 g pişmiş servis',recipeComplete:true,ingredients:[['Tuz','5 g'],['Kuzu kol','125 g']]},
+  {id:'etli-ekmek',name:'Etli Ekmek',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',recipeComplete:true,ingredients:[['Kıyma','120 g'],['Domates','90 g'],['Biber','40 g'],['Soğan','35 g'],['Hamur','200 g'],['Tuz','5 g']]},
+  {id:'bicak-arasi',name:'Bıçak Arası',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',recipeComplete:true,ingredients:[['Et','100 g'],['Domates','90 g'],['Biber','40 g'],['Kavram yağı','50 g'],['Tuz','5 g'],['Sıvı yağ','10 g'],['Hamur','200 g']]},
+  {id:'mevlana',name:'Mevlana',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',recipeComplete:true,ingredients:[['Kıyma','100 g'],['Peynir','30 g'],['Domates','90 g'],['Biber','40 g'],['Soğan','35 g'],['Hamur','200 g'],['Tuz','5 g']]},
+  {id:'lahmacun',name:'Lahmacun',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',recipeComplete:true,ingredients:[['Kıyma','120 g'],['Domates','90 g'],['Biber','40 g'],['Soğan','35 g'],['Sarımsak','5 g'],['İsot','10 g'],['Maydanoz','10 g'],['Tuz','5 g'],['Hamur','55 g']]},
+  {id:'kasarli-pide',name:'Kaşarlı Pide',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',recipeComplete:false,ingredients:[]},
+  {id:'peynirli-pide',name:'Peynirli Pide (Börek)',category:'Pide & Fırın',emoji:'⌁',portion:'180 g pişmiş servis',recipeComplete:false,ingredients:[['Peynir','120 g'],['Kaşar','40 g'],['Küflü peynir','25 g']]},
+  {id:'bamya',name:'Bamya',category:'Çorba & Başlangıç',emoji:'◒',portion:'200 g pişmiş servis',recipeComplete:false,ingredients:[]},
+  {id:'kelle-paca',name:'Kelle Paça',category:'Çorba & Başlangıç',emoji:'◒',portion:'100 g pişmiş servis',recipeComplete:false,ingredients:[]},
+  {id:'mercimek',name:'Mercimek',category:'Çorba & Başlangıç',emoji:'◒',portion:'100 g pişmiş servis',recipeComplete:false,ingredients:[]},
+  {id:'icli-kofte',name:'İçli Köfte',category:'Çorba & Başlangıç',emoji:'◒',portion:'80 g pişmiş servis',recipeComplete:false,ingredients:[]}
 ];
 
-// Nutrient estimates are calculated for the cooked serving weights supplied by the user.
-// They use typical recipe averages and deliberately do not reuse values from the handwritten photos.
-const nutritionEstimates = {
-  adana: [390,25,31,2,0], urfa: [335,27,24,2,0],
-  'sarma-beyti': [700,44,36,50,2], 'tavuk-sis': [420,60,17,6,1],
-  kanat: [490,44,34,2,0], kofte: [590,51,36,15,1],
-  'ali-nazik': [430,26,28,18,4], 'cop-sis': [650,75,37,3,0],
-  'yogurtlu-kebap': [560,30,30,42,2], 'patlican-kebap': [455,31,24,29,6],
-  tandir: [325,34,21,0,0], 'etli-ekmek': [455,21,17,55,3],
-  'bicak-arasi': [450,20,18,52,3], mevlana: [495,22,21,54,3],
-  lahmacun: [385,20,12,49,4], 'kasarli-pide': [505,22,19,61,2],
-  'peynirli-pide': [535,19,26,56,2], bamya: [200,9,9,21,7],
-  'kelle-paca': [125,10,8,3,0], mercimek: [70,4,2,9,3],
-  'icli-kofte': [185,7,8,21,2]
+// Per-100 g reference values from USDA FoodData Central SR Legacy generic foods.
+// Local recipe amounts are treated as the amount used for one menu item; cooking loss is not modeled.
+const nutrientReference = {
+  beefMince:[215,18.59,15,0,0], lambMince:[193,20.33,12.41,0,0], animalFat:[902,0,100,0,0],
+  paprika:[282,14.14,12.89,53.99,34.9], redPepper:[26,.99,.3,6.03,2.1], salt:[0,0,0,0,0],
+  butter:[717,.85,81.11,.06,0], tomatoPaste:[82,4.32,.47,18.91,4.1], eggplant:[25,.98,.18,5.88,3],
+  yogurt:[61,3.47,3.25,4.66,0], pita:[275,9.1,1.2,55.7,2.2], bread:[266,8.85,3.33,49.42,2.7],
+  chickenThigh:[121,19.66,4.12,0,0], chickenWing:[191,17.52,12.85,0,0], oil:[884,0,100,0,0],
+  beefSteak:[201,20.3,12.71,0,0], lambShoulder:[264,16.58,21.45,0,0], tomato:[18,.88,.2,3.89,1.2],
+  onion:[40,1.1,.1,9.34,1.7], garlic:[149,6.36,.5,33.06,2.1], parsley:[36,2.97,.79,6.33,3.3],
+  feta:[265,14.21,21.49,3.88,0], cheddar:[410,24.25,33.82,2.13,0], blueCheese:[353,21.4,28.74,2.34,0]
 };
+const ingredientReference = {
+  'Dana kıyma':'beefMince','Kıyma':'beefMince','Kuzu kıyma':'lambMince','Kuyruk yağı':'animalFat','Kavram yağı':'animalFat',
+  'Pul biber':'paprika','Toz biber':'paprika','İsot':'paprika','Kapya biber':'redPepper','Biber':'redPepper','Tuz':'salt',
+  'Tereyağı':'butter','Domates sosu':'tomatoPaste','Salça sos':'tomatoPaste','Domates salçası':'tomatoPaste','Patlıcan':'eggplant',
+  'Yoğurt':'yogurt','Pide':'pita','Lavaş':'pita','Hamur':'pita','Ekmek':'bread','Tavuk but':'chickenThigh','Tavuk kanat':'chickenWing',
+  'Sıvı yağ':'oil','Dana eti':'beefSteak','Et':'beefSteak','Kuzu kol':'lambShoulder','Domates':'tomato','Soğan':'onion',
+  'Sarımsak':'garlic','Maydanoz':'parsley','Peynir':'feta','Kaşar':'cheddar','Küflü peynir':'blueCheese'
+};
+const allergenReference = {
+  'Gluten içeren tahıllar (buğday)': new Set(['Ekmek','Hamur','Lavaş','Pide']),
+  'Süt ve süt ürünleri': new Set(['Peynir','Kaşar','Küflü peynir','Yoğurt','Tereyağı'])
+};
+function gramsOf(amount) { return Number(String(amount).match(/[\d.]+/)?.[0] || 0); }
+function calculateNutrition(dish) {
+  if (!dish.recipeComplete || dish.ingredients.some(([name]) => !ingredientReference[name])) return null;
+  const totals = [0,0,0,0,0];
+  for (const [name,amount] of dish.ingredients) {
+    const values = nutrientReference[ingredientReference[name]];
+    values.forEach((value,index) => totals[index] += value * gramsOf(amount) / 100);
+  }
+  const rounded = [Math.round(totals[0]), ...totals.slice(1).map(value => Math.round(value * 10) / 10)];
+  return [['Kalori',`~${rounded[0]} kcal`],['Protein',`~${rounded[1]} g`],['Yağ',`~${rounded[2]} g`],['Karbonhidrat',`~${rounded[3]} g`],['Lif',`~${rounded[4]} g`]];
+}
 for (const dish of dishes) {
-  const [kcal, protein, fat, carbs, fiber] = nutritionEstimates[dish.id];
-  dish.kcalCard = `~${kcal} kcal`;
-  dish.nutrition = [
-    ['Kalori', `~${kcal} kcal`], ['Protein', `~${protein} g`], ['Yağ', `~${fat} g`],
-    ['Karbonhidrat', `~${carbs} g`], ['Lif', `~${fiber} g`]
-  ];
-  dish.note = 'Tahmini standart tarif ortalamasıdır; etin yağ oranı, tarif ve pişirme yağına göre değişebilir.';
+  dish.nutrition = calculateNutrition(dish);
+  dish.kcalCard = dish.nutrition ? dish.nutrition[0][1] : 'Hesap bekliyor';
+  dish.recipeTotalGrams = dish.ingredients.reduce((sum, [,amount]) => sum + gramsOf(amount), 0);
+  dish.allergens = Object.entries(allergenReference)
+    .filter(([,ingredientNames]) => dish.ingredients.some(([name]) => ingredientNames.has(name)))
+    .map(([allergen]) => allergen);
+  dish.note = dish.recipeComplete
+    ? 'Standart gıda bileşim verilerinden yaklaşık hesaplandı; listelenen gramajların tek ürün reçetesi olduğu varsayıldı. Belirtilmeyen kıyma dana kıyma, et dana eti, hamur/lavaş beyaz pide, peynir beyaz peynir, kaşar cheddar; tavuk but derisiz kabul edildi. Ürün markası, etin yağ oranı, kanat kemiği, pişirme kaybı ve porsiyon verimi sonucu değiştirebilir.'
+    : 'Bu ürünün tam reçetesi paylaşılmadığı için besin değerleri hesaplanmadı.';
 }
 
 // Prices transcribed from the restaurant menu photos shared on 2026-11-19.
@@ -112,13 +134,27 @@ function renderDishes() {
   }));
 }
 function detailMarkup(dish) {
-  const nutritionRows = dish.nutrition.map(([name,value])=>`<div class="nutrition-cell"><b>${escapeHTML(value)}</b><span>${escapeHTML(name)}</span></div>`).join('');
+  const nutritionRows = dish.nutrition
+    ? dish.nutrition.map(([name,value])=>`<div class="nutrition-cell"><b>${escapeHTML(value)}</b><span>${escapeHTML(name)}</span></div>`).join('')
+    : '<div class="detail-note">Tam tarif olmadığı için bu ürünün kalori, protein, yağ, karbonhidrat ve lif hesabı gösterilmiyor.</div>';
   const ingredientRows = dish.ingredients.map(([name,amount])=>`<li><span>${escapeHTML(name)}</span><b>${escapeHTML(amount)}</b></li>`).join('');
   const ingredients = ingredientRows ? `<ul class="ingredient-list">${ingredientRows}</ul>` : '<div class="detail-note">Bu yemek için içerik listesi henüz doğrulanmadı.</div>';
+  const allergenTags = dish.allergens.length
+    ? `<div class="allergen-list">${dish.allergens.map(name=>`<span class="allergen-tag warn">${escapeHTML(name)}</span>`).join('')}</div>`
+    : `<div class="detail-note">${dish.recipeComplete ? 'Listelenen malzemelerde 14 ana alerjen grubundan açıkça belirlenen bir bileşen yok.' : 'Tarif eksik olduğu için alerjenler belirlenemiyor.'}</div>`;
+  const allergenCaveat = dish.recipeComplete
+    ? 'Yalnızca paylaşılan reçetede doğrudan görülen alerjenler listelenmiştir.'
+    : 'Tarif tamamlanmadan bu ürünün alerjen listesi eksik kalabilir.';
+  const portionGrams = Number(dish.portion.match(/[\d.]+/)?.[0] || 0);
+  const yieldNote = dish.nutrition && Math.abs(dish.recipeTotalGrams - portionGrams) > portionGrams * 0.2
+    ? `<div class="detail-note">Girilen malzemeler toplamı ${dish.recipeTotalGrams} g; menüdeki pişmiş servis ${portionGrams} g. Reçete verimi/porsiyon eşleşmesi teyit edilmedi.</div>`
+    : '';
   return `<div class="inline-meta"><span>Porsiyon: ${escapeHTML(dish.portion)}</span><b>${escapeHTML(dish.priceLabel || 'Fiyat henüz eklenmedi')}</b></div>
-    <section class="detail-block"><h3>Kalori ve besin bilgisi <span>tahmini · pişmiş porsiyon</span></h3><div class="nutrition-grid">${nutritionRows}</div></section>
+    <section class="detail-block"><h3>Kalori ve besin bilgisi <span>yaklaşık hesap</span></h3><div class="nutrition-grid">${nutritionRows}</div></section>
     <section class="detail-block"><h3>İçerik</h3>${ingredients}</section>
-    <div class="detail-warning"><b>Tahmin notu</b> · ${escapeHTML(dish.note)} Lif dahil değerler yaklaşık porsiyon değeridir; laboratuvar analizi değildir.</div>
+    <section class="detail-block"><h3>Alerjen bilgisi</h3>${allergenTags}<div class="detail-note">${escapeHTML(allergenCaveat)} Tedarikçi ürün etiketleri ve mutfaktaki çapraz temas işletme tarafından ayrıca doğrulanmalıdır.</div></section>
+    ${yieldNote}
+    <div class="detail-warning"><b>Hesap notu</b> · ${escapeHTML(dish.note)} Değerler laboratuvar analizi değildir.</div>
   `;
 }
 renderDishes();
