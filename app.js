@@ -147,7 +147,7 @@ function detailMarkup(dish) {
     : 'Tarif tamamlanmadan bu ürünün alerjen listesi eksik kalabilir.';
   const portionGrams = Number(dish.portion.match(/[\d.]+/)?.[0] || 0);
   const yieldNote = dish.nutrition && Math.abs(dish.recipeTotalGrams - portionGrams) > portionGrams * 0.2
-    ? `<div class="detail-note">Girilen malzemeler toplamı ${dish.recipeTotalGrams} g; menüdeki pişmiş servis ${portionGrams} g. Reçete verimi/porsiyon eşleşmesi teyit edilmedi.</div>`
+    ? `<div class="detail-note">Girilen malzemeler toplamı ${dish.recipeTotalGrams} g; menüdeki pişmiş servis ${portionGrams} g.</div>`
     : '';
   return `<div class="inline-meta"><span>Porsiyon: ${escapeHTML(dish.portion)}</span><b>${escapeHTML(dish.priceLabel || 'Fiyat henüz eklenmedi')}</b></div>
     <section class="detail-block"><h3>Kalori ve besin bilgisi <span>yaklaşık hesap</span></h3><div class="nutrition-grid">${nutritionRows}</div></section>
