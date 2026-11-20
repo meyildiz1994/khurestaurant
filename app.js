@@ -154,7 +154,7 @@ function detailMarkup(dish) {
     <section class="detail-block"><h3>İçerik</h3>${ingredients}</section>
     <section class="detail-block"><h3>Alerjen bilgisi</h3>${allergenTags}<div class="detail-note">${escapeHTML(allergenCaveat)} Tedarikçi ürün etiketleri ve mutfaktaki çapraz temas işletme tarafından ayrıca doğrulanmalıdır.</div></section>
     ${yieldNote}
-    <div class="detail-warning"><b>Hesap notu</b> · ${escapeHTML(dish.note)} Değerler laboratuvar analizi değildir.</div>
+    <div class="detail-warning"><b>NOT:</b> Değerler laboratuvar analizi değildir.</div>
   `;
 }
 renderDishes();
