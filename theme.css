@@ -122,6 +122,7 @@ body{background:var(--paper);color:var(--ink)}
 .footer-logo{width:76px;height:50px;object-fit:contain;display:block}
 .inline-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px}
 .inline-meta>b{color:#a84945;font-size:9px;font-weight:700}
+.ingredient-list li.ingredient-group{display:block;padding:8px 10px;background:#fbefec;color:#a84945;font-size:9px;font-weight:700}
 @media(max-width:620px){.app-header{height:84px;gap:8px}.brand img{width:72px;height:72px}.header-center{gap:3px;padding:0 2px}.header-center strong{font-size:8px}.header-center small{font-size:6px}.header-copy strong{font-size:10px}.header-copy small{font-size:6px}.dish-title>.price-tag{font-size:8px;padding:3px 6px}.dish-title>.price-tag.pending{font-size:7px}.price-options>span{font-size:7px;padding:3px 5px}.inline-meta>b{font-size:8px}}
 
 /* Product hierarchy follows the supplied compact food-card reference. */
