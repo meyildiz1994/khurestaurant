@@ -41,11 +41,11 @@ const dishes = [
 
 // Per-100 g edible-portion values: [kcal, protein g, fat g, carbohydrate g, fibre g].
 // Source: TürKomp (Ulusal Gıda Kompozisyon Veri Tabanı, turkomp.tarimorman.gov.tr), read 2026-11-24.
-// TürKomp has no entry for plain minced meat, head meat, skinless chicken thigh or blue cheese; those use USDA FoodData Central SR Legacy.
+// TürKomp has no entry for head meat, skinless chicken thigh or blue cheese; those use USDA FoodData Central SR Legacy.
+// TürKomp has no plain minced meat either: kıyma is modelled from TürKomp lean shoulder meat + tail fat at MINCE_FAT_PERCENT.
 // TürKomp lists no fat value for pul/toz biber; fat is taken as 0 (used in a few grams only).
+const MINCE_FAT_PERCENT = 15; // restoran oranı bilmediği için ortalama 'orta yağlı' kıyma kabul edildi
 const nutrientReference = {
-  beefMince:[215,18.59,15,0,0],          // USDA 23572 Beef, ground, 85% lean / 15% fat, raw
-  lambMince:[282,16.56,23.41,0,0],       // USDA 17224 Lamb, ground, raw
   beefHead:[201,20.3,12.71,0,0],         // USDA beef composite, raw (no head-meat entry in TürKomp)
   blueCheese:[353,21.4,28.74,2.34,0],    // USDA 01004 Cheese, blue
   beefMeat:[135,20.86,5.73,0,0],         // TürKomp: Dana eti, kol
@@ -81,6 +81,14 @@ const nutrientReference = {
   bulgur:[357,12.08,3.95,64.97,6.79],    // TürKomp: Bulgur, pilavlık
   water:[0,0,0,0,0]
 };
+// Minced meat = lean meat + tail fat, mixed so that total fat equals MINCE_FAT_PERCENT.
+function minceFrom(lean) {
+  const fat = nutrientReference.animalFat;
+  const share = (MINCE_FAT_PERCENT - lean[2]) / (fat[2] - lean[2]);
+  return lean.map((value,index) => value * (1 - share) + fat[index] * share);
+}
+nutrientReference.beefMince = minceFrom(nutrientReference.beefMeat);
+nutrientReference.lambMince = minceFrom(nutrientReference.lambShoulder);
 // Bone-in weights: values scaled to the edible part (bone ~46% of chicken wings, ~20% of lamb shoulder; USDA refuse factors).
 nutrientReference.chickenWingBoneIn = nutrientReference.chickenWing.map(value => value * 0.54);
 nutrientReference.lambShoulderBoneIn = nutrientReference.lambShoulder.map(value => value * 0.80);
