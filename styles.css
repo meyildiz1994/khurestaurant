@@ -38,19 +38,25 @@ button { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
 /* ---------- Tabela ---------- */
-.sign {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: calc(22px + env(safe-area-inset-top)) 20px 22px;
+.sign { text-align: center; }
+.sign-band {
+  position: relative;
+  height: calc(76px + env(safe-area-inset-top));
   background: var(--salmon);
-  border-bottom: 3px solid var(--ink);
 }
-.sign-logo { width: 96px; height: 96px; flex: none; object-fit: contain; }
-.sign-text { flex: 1 1 auto; max-width: 440px; }
-.sign h1 { margin: 0; font-size: 24px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
-.sign p { margin: 4px 0 0; font-size: 14px; font-weight: 500; }
+.sign-logo {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, 50%);
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgb(30 23 22 / 0.16));
+}
+.sign-text { padding: 70px 20px 4px; }
+.sign h1 { margin: 0; font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
+.sign p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
 
 /* ---------- Arama + kategoriler (yapışkan) ---------- */
 .toolbar {
