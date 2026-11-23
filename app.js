@@ -172,72 +172,185 @@ for (const dish of dishes) {
     console.warn(`[gramaj] ${dish.name}: malzeme toplamı ${dish.recipeTotalGrams} g, porsiyon etiketi ${portionGrams} g`);
 }
 
-let query = '';
-const grid = document.querySelector('#menu-grid');
+// ---------- Rendering ----------
+const categories = [...new Set(dishes.map(dish => dish.category))];
+const categoryIds = Object.fromEntries(categories.map((name,index) => [name, `kategori-${index + 1}`]));
+const shortAllergen = {
+  'Gluten içeren tahıllar (buğday)':'Gluten',
+  'Süt ve süt ürünleri':'Süt',
+  'Yumurta ve yumurta ürünleri':'Yumurta'
+};
+const sectionsEl = document.querySelector('#sections');
+const chipsEl = document.querySelector('#chips');
 const searchInput = document.querySelector('#search');
+const sheet = document.querySelector('#sheet');
+const sheetBody = document.querySelector('#sheet-body');
+let query = '';
 
 function escapeHTML(value='') { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
-function imageMarkup(dish, className) { return `<img class="${className}" src="assets/${escapeHTML(dish.imageId || dish.id)}.jpg" alt="${escapeHTML(dish.name)} için temsili yemek görseli" loading="lazy" />`; }
-function filteredDishes() {
-  const normalized = query.trim().toLocaleLowerCase('tr');
-  return dishes.filter(dish => {
-    const haystack = [dish.name,dish.note,...dish.ingredients.map(([name,amount,component])=>`${component || ''} ${name} ${amount}`)].join(' ').toLocaleLowerCase('tr');
-    return !normalized || haystack.includes(normalized);
+function imageSrc(dish) { return `assets/${dish.imageId || dish.id}.jpg`; }
+function kcalNumber(dish) { return dish.nutrition ? dish.nutrition[0][1].replace(/[~\s]|kcal/g,'') : null; }
+function priceText(dish) { return dish.priceLabel || 'Fiyatı sorunuz'; }
+function previewText(dish) {
+  if (dish.cardDescription) return dish.cardDescription.replace(/ · /g, ', ');
+  const names = [...new Set(dish.ingredients.map(([name]) => name.replace(' (kemikli)','')))]
+    .filter(name => !['Tuz','Su','Sıvı yağ'].includes(name));
+  return names.map((name,index) => index ? name.toLocaleLowerCase('tr') : name).join(', ');
+}
+function matches(dish, needle) {
+  if (!needle) return true;
+  const haystack = [dish.name, dish.category, ...dish.ingredients.map(([name,,component]) => `${name} ${component || ''}`)].join(' ').toLocaleLowerCase('tr');
+  return haystack.includes(needle);
+}
+
+function rowMarkup(dish) {
+  const kcal = kcalNumber(dish);
+  const allergens = dish.allergens.map(name => shortAllergen[name] || name);
+  const price = dish.id === 'icli-kofte'
+    ? '<span class="price">₺90 <small>tek</small></span><span class="price-alt">₺270 porsiyon</span>'
+    : `<span class="price${dish.priceLabel ? '' : ' price-ask'}">${escapeHTML(priceText(dish))}</span>`;
+  return `<li>
+    <button class="dish" type="button" data-id="${dish.id}">
+      <img class="dish-photo" src="${imageSrc(dish)}" alt="" width="112" height="112" loading="lazy" decoding="async" />
+      <span class="dish-text">
+        <span class="dish-name">${escapeHTML(dish.name)}</span>
+        <span class="dish-desc">${escapeHTML(previewText(dish))}</span>
+        ${allergens.length ? `<span class="dish-allergens">${allergens.map(name => `<span>${escapeHTML(name)}</span>`).join('')}</span>` : ''}
+        <span class="dish-facts">
+          <span class="dish-price">${price}</span>
+          <span class="kcal">${kcal ? `${escapeHTML(kcal)} kcal` : 'Kalori hazırlanıyor'}</span>
+        </span>
+      </span>
+    </button>
+  </li>`;
+}
+
+function render() {
+  const needle = query.trim().toLocaleLowerCase('tr');
+  let total = 0;
+  sectionsEl.innerHTML = categories.map(category => {
+    const items = dishes.filter(dish => dish.category === category && matches(dish, needle));
+    total += items.length;
+    if (!items.length) return '';
+    return `<section class="category" id="${categoryIds[category]}" aria-labelledby="${categoryIds[category]}-baslik">
+      <div class="category-head"><h2 id="${categoryIds[category]}-baslik">${escapeHTML(category)}</h2><span>${items.length} yemek</span></div>
+      <ul class="dish-list">${items.map(rowMarkup).join('')}</ul>
+    </section>`;
+  }).join('');
+  document.querySelector('#empty').hidden = total !== 0;
+  document.querySelector('#empty-query').textContent = query.trim();
+  chipsEl.querySelectorAll('.chip').forEach(chip => {
+    chip.hidden = !document.getElementById(chip.dataset.target);
+  });
+  observeSections();
+}
+
+function renderChips() {
+  chipsEl.innerHTML = categories.map(category =>
+    `<a class="chip" role="listitem" href="#${categoryIds[category]}" data-target="${categoryIds[category]}">${escapeHTML(category)}</a>`
+  ).join('');
+}
+
+// Highlight the chip of the category currently on screen.
+let observer;
+function setActiveChip(id) {
+  chipsEl.querySelectorAll('.chip').forEach(chip => {
+    const active = chip.dataset.target === id;
+    chip.classList.toggle('active', active);
+    if (active) chip.setAttribute('aria-current','true'); else chip.removeAttribute('aria-current');
   });
 }
-function renderDishes() {
-  const results = filteredDishes();
-  document.querySelector('#result-count').textContent = `${results.length} yemek`;
-  document.querySelector('#empty-state').hidden = results.length !== 0;
-  grid.hidden = results.length === 0;
-  grid.innerHTML = results.map(dish => {
-    const preview = dish.ingredients.length
-      ? dish.cardDescription || dish.ingredients.slice(0,3).map(([name,amount])=>amount ? `${amount} ${name}` : name).join(' · ')
-      : 'İçerik listesi henüz doğrulanmadı';
-    const price = dish.id === 'icli-kofte'
-      ? '<span class="price-options"><span>Tek ₺90</span><span>Porsiyon ₺270</span></span>'
-      : `<span class="card-price${dish.priceLabel ? '' : ' pending'}">${escapeHTML(dish.priceLabel || 'Fiyat bekleniyor')}</span>`;
-    return `<article class="dish-card" data-id="${dish.id}">
-      <button class="dish-row" type="button" aria-expanded="false" aria-label="${escapeHTML(dish.name)} detaylarını aç">
-        ${imageMarkup(dish,'dish-thumb')}
-        <span class="dish-main"><span class="dish-title"><b>${escapeHTML(dish.name)}</b></span><span class="dish-ingredients">${escapeHTML(preview)}</span><span class="dish-footer">${price}<span class="card-kcal"><span aria-hidden="true">♨</span>${escapeHTML(dish.kcalCard)}</span></span></span>
-        <span class="dish-arrow" aria-hidden="true">⌄</span>
-      </button>
-      <div class="inline-detail" hidden>${detailMarkup(dish)}</div>
-    </article>`;
-  }).join('');
-  grid.querySelectorAll('.dish-row').forEach(button => button.addEventListener('click',()=>{
-    const card=button.closest('.dish-card');
-    const detail=card.querySelector('.inline-detail');
-    const opening=detail.hidden;
-    grid.querySelectorAll('.inline-detail').forEach(item=>{item.hidden=true;item.closest('.dish-card').classList.remove('expanded');item.closest('.dish-card').querySelector('.dish-row').setAttribute('aria-expanded','false');});
-    if(opening){detail.hidden=false;card.classList.add('expanded');button.setAttribute('aria-expanded','true');}
-  }));
+function observeSections() {
+  observer?.disconnect();
+  const sections = [...document.querySelectorAll('.category')];
+  if (!sections.length) return;
+  setActiveChip(sections[0].id);
+  observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (visible[0]) setActiveChip(visible[0].target.id);
+  }, { rootMargin: '-140px 0px -60% 0px' });
+  sections.forEach(section => observer.observe(section));
 }
-function detailMarkup(dish) {
-  const nutritionRows = dish.nutrition
-    ? dish.nutrition.map(([name,value])=>`<div class="nutrition-cell"><b>${escapeHTML(value)}</b><span>${escapeHTML(name)}</span></div>`).join('')
-    : `<div class="detail-note">${escapeHTML(dish.nutritionPendingMessage || 'Tam tarif olmadığı için bu ürünün kalori, protein, yağ, karbonhidrat ve lif hesabı gösterilmiyor.')}</div>`;
-  let previousComponent = '';
-  const ingredientRows = dish.ingredients.map(([name,amount,component])=>{
-    const heading = component && component !== previousComponent ? `<li class="ingredient-group">${escapeHTML(component)}</li>` : '';
-    previousComponent = component || '';
-    return `${heading}<li><span>${escapeHTML(name)}</span>${amount ? `<b>${escapeHTML(amount)}</b>` : '<b class="amount-pending">gramaj bekleniyor</b>'}</li>`;
+
+// ---------- Detail sheet ----------
+function sheetMarkup(dish) {
+  const kcal = kcalNumber(dish);
+  const macros = dish.nutrition ? dish.nutrition.slice(1).map(([label,value]) =>
+    `<div><dt>${escapeHTML(label)}</dt><dd>${escapeHTML(value.replace('~','').replace('.',','))}</dd></div>`).join('') : '';
+  const portion = dish.portion
+    ? dish.portion
+    : (dish.recipeComplete && dish.recipeTotalGrams ? `Tarif toplamı yaklaşık ${Math.round(dish.recipeTotalGrams)} g (pişirme öncesi)` : '');
+  const price = dish.id === 'icli-kofte' ? 'Tek ₺90, porsiyon ₺270' : priceText(dish);
+
+  let previous = '';
+  const ingredients = dish.ingredients.map(([name,amount,component]) => {
+    const heading = component && component !== previous ? `<li class="group">${escapeHTML(component)}</li>` : '';
+    previous = component || '';
+    return `${heading}<li><span>${escapeHTML(name)}</span><span class="amount">${amount ? escapeHTML(amount) : 'gramaj bekleniyor'}</span></li>`;
   }).join('');
-  const ingredients = ingredientRows ? `<ul class="ingredient-list">${ingredientRows}</ul>` : '<div class="detail-note">Bu yemek için içerik listesi henüz doğrulanmadı.</div>';
-  const allergenTags = dish.allergens.length
-    ? `<div class="allergen-list">${dish.allergens.map(name=>`<span class="allergen-tag warn">${escapeHTML(name)}</span>`).join('')}</div>`
-    : `<div class="detail-note">${dish.recipeComplete ? 'Listelenen malzemelerde 14 ana alerjen grubundan açıkça belirlenen bir bileşen yok.' : 'Tarif eksik olduğu için alerjenler belirlenemiyor.'}</div>`;
-  const allergenCaveat = dish.recipeComplete
-    ? 'Yalnızca paylaşılan reçetede doğrudan görülen alerjenler listelenmiştir.'
-    : 'Tarif tamamlanmadan bu ürünün alerjen listesi eksik kalabilir.';
-  return `<div class="inline-meta">${dish.portion ? `<span>Porsiyon: ${escapeHTML(dish.portion)}</span>` : (dish.recipeComplete && dish.recipeTotalGrams ? `<span>Tarif toplamı: ~${Math.round(dish.recipeTotalGrams)} g (pişirme öncesi)</span>` : '')}<b>${escapeHTML(dish.priceLabel || 'Fiyat henüz eklenmedi')}</b></div>
-    <section class="detail-block"><h3>Kalori ve besin bilgisi <span>1 porsiyon · yaklaşık hesap</span></h3><div class="nutrition-grid">${nutritionRows}</div></section>
-    <section class="detail-block"><h3>İçerik</h3>${ingredients}</section>
-    <section class="detail-block"><h3>Alerjen bilgisi</h3>${allergenTags}<div class="detail-note">${escapeHTML(allergenCaveat)} Tedarikçi ürün etiketleri ve mutfaktaki çapraz temas işletme tarafından ayrıca doğrulanmalıdır.</div></section>
-    <div class="detail-warning"><b>NOT:</b> Değerler laboratuvar analizi değildir.</div>
-  `;
+
+  const allergens = dish.allergens.length
+    ? `<ul class="allergen-tags">${dish.allergens.map(name => `<li>${escapeHTML(name)}</li>`).join('')}</ul>`
+    : `<p class="muted">${dish.recipeComplete ? 'Tarifteki malzemelerde 14 ana alerjen grubundan biri bulunmuyor.' : 'Tarif tamamlanmadığı için alerjen listesi eksik olabilir.'}</p>`;
+
+  return `
+    <img class="sheet-photo" src="${imageSrc(dish)}" alt="${escapeHTML(dish.name)}, temsili görsel" width="600" height="375" />
+    <button class="sheet-close" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="sheet-content">
+      <div class="sheet-head">
+        <h2 id="sheet-title">${escapeHTML(dish.name)}</h2>
+        <p class="sheet-price${dish.priceLabel || dish.id === 'icli-kofte' ? '' : ' price-ask'}">${escapeHTML(price)}</p>
+      </div>
+      ${portion ? `<p class="muted">${escapeHTML(portion)}</p>` : ''}
+
+      <section class="block nutrition">
+        ${kcal
+          ? `<p class="kcal-big"><strong>${escapeHTML(kcal)}</strong> kcal <span>1 porsiyon, yaklaşık</span></p><dl class="macros">${macros}</dl>`
+          : `<p class="muted">Tarif tamamlanınca kalori ve besin değerleri burada görünecek.</p>`}
+      </section>
+
+      <section class="block">
+        <h3>Alerjenler</h3>
+        ${allergens}
+        <p class="muted small">Tedarikçi ürünlerinin içeriği ve mutfakta çapraz bulaşma ihtimali ayrıca değerlendirilmelidir. Alerjiniz varsa personelimize bildirin.</p>
+      </section>
+
+      <section class="block">
+        <h3>İçindekiler</h3>
+        ${ingredients ? `<ul class="ingredients">${ingredients}</ul>` : '<p class="muted">İçerik listesi hazırlanıyor.</p>'}
+      </section>
+    </div>`;
 }
-renderDishes();
-searchInput.addEventListener('input',event=>{query=event.target.value;renderDishes();});
-document.querySelector('#clear-filters').addEventListener('click',()=>{query='';searchInput.value='';renderDishes();});
+
+function openSheet(id) {
+  const dish = dishes.find(item => item.id === id);
+  if (!dish) return;
+  sheetBody.innerHTML = sheetMarkup(dish);
+  sheetBody.scrollTop = 0;
+  sheet.showModal();
+  sheetBody.querySelector('.sheet-close').addEventListener('click', closeSheet);
+  if (location.hash !== `#${id}`) history.replaceState(null, '', `#${id}`);
+}
+function closeSheet() {
+  if (!sheet.open) return;
+  sheet.classList.add('closing');
+  const finish = () => { sheet.classList.remove('closing'); sheet.close(); };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) finish();
+  else setTimeout(finish, 180);
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
+sectionsEl.addEventListener('click', event => {
+  const button = event.target.closest('.dish');
+  if (button) openSheet(button.dataset.id);
+});
+sheet.addEventListener('click', event => { if (event.target === sheet) closeSheet(); });
+sheet.addEventListener('cancel', event => { event.preventDefault(); closeSheet(); });
+
+searchInput.addEventListener('input', event => { query = event.target.value; render(); });
+document.querySelector('#clear-search').addEventListener('click', () => { query = ''; searchInput.value = ''; render(); searchInput.focus(); });
+
+renderChips();
+render();
+const initial = location.hash.slice(1);
+if (initial && dishes.some(dish => dish.id === initial)) openSheet(initial);
