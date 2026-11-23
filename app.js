@@ -207,20 +207,20 @@ function rowMarkup(dish) {
   const kcal = kcalNumber(dish);
   const allergens = dish.allergens.map(name => shortAllergen[name] || name);
   const price = dish.id === 'icli-kofte'
-    ? '<span class="price">₺90<small> tek</small></span><span class="price-alt">₺270 porsiyon</span>'
+    ? '<span class="price">₺90 <small>tek</small></span><span class="price-alt">₺270 porsiyon</span>'
     : `<span class="price${dish.priceLabel ? '' : ' price-ask'}">${escapeHTML(priceText(dish))}</span>`;
   return `<li>
     <button class="dish" type="button" data-id="${dish.id}">
+      <img class="dish-photo" src="${imageSrc(dish)}" alt="" width="112" height="112" loading="lazy" decoding="async" />
       <span class="dish-text">
         <span class="dish-name">${escapeHTML(dish.name)}</span>
         <span class="dish-desc">${escapeHTML(previewText(dish))}</span>
+        ${allergens.length ? `<span class="dish-allergens">${allergens.map(name => `<span>${escapeHTML(name)}</span>`).join('')}</span>` : ''}
         <span class="dish-facts">
-          ${price}
+          <span class="dish-price">${price}</span>
           <span class="kcal">${kcal ? `${escapeHTML(kcal)} kcal` : 'Kalori hazırlanıyor'}</span>
         </span>
-        ${allergens.length ? `<span class="dish-allergens">İçerir: ${escapeHTML(allergens.join(', ').toLocaleLowerCase('tr'))}</span>` : ''}
       </span>
-      <img class="dish-photo" src="${imageSrc(dish)}" alt="" width="104" height="104" loading="lazy" decoding="async" />
     </button>
   </li>`;
 }
@@ -233,7 +233,7 @@ function render() {
     total += items.length;
     if (!items.length) return '';
     return `<section class="category" id="${categoryIds[category]}" aria-labelledby="${categoryIds[category]}-baslik">
-      <h2 id="${categoryIds[category]}-baslik">${escapeHTML(category)}</h2>
+      <div class="category-head"><h2 id="${categoryIds[category]}-baslik">${escapeHTML(category)}</h2><span>${items.length} yemek</span></div>
       <ul class="dish-list">${items.map(rowMarkup).join('')}</ul>
     </section>`;
   }).join('');

@@ -1,92 +1,77 @@
-/* Fontlar siteyle birlikte gelir (Google Fonts beklenmez). Fraunces ve Rubik: SIL Open Font License. */
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/fonts/fraunces-latin-opsz-normal.woff2) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Rubik';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/rubik-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Rubik';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/rubik-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Rubik';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/rubik-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/fonts/fraunces-latin-ext-opsz-normal.woff2) format('woff2-variations');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Rubik';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/rubik-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Rubik';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/rubik-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Rubik';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/rubik-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* Poppins siteyle birlikte gelir (SIL Open Font License). */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 
-/* Konyalı Hacı Usta — QR menü
-   Renkler logodan alındı: somon tabela, krem, mürekkep siyahı. */
+/* Konyalı Hacı Usta — QR menü. Renkler logodan: somon, krem, siyah. */
 :root {
   --salmon: #EA8985;
+  --salmon-soft: #FBE3E0;
   --salmon-ink: #A8433F;   /* beyaz üzerinde okunur somon (AA) */
   --cream: #F4EEE3;
-  --ink: #221A18;
-  --muted: #6F625E;
-  --line: #EDE5E0;
-  --paper: #FFFFFF;
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --cream-deep: #E9E0D1;
+  --ink: #1E1716;
+  --muted: #6D605B;
+  --line: #E8DDD2;
+  --white: #FFFFFF;
+  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --page: 640px;
-  --toolbar-h: 116px;
+  --toolbar-h: 120px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--toolbar-h); }
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
-  font: 400 15px/1.45 var(--sans);
+  font: 400 14px/1.5 var(--font);
   -webkit-font-smoothing: antialiased;
 }
 img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; }
-:focus-visible { outline: 3px solid var(--salmon-ink); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
 /* ---------- Tabela ---------- */
 .sign {
-  background: var(--salmon);
-  color: var(--ink);
-  padding: calc(20px + env(safe-area-inset-top)) 20px 22px;
-}
-.sign > * { max-width: var(--page); }
-.sign {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
+  padding: calc(22px + env(safe-area-inset-top)) 20px 22px;
+  background: var(--salmon);
+  border-bottom: 3px solid var(--ink);
 }
-@media (min-width: 680px) {
-  .sign { justify-content: center; }
-  .sign-text { flex: 0 1 calc(var(--page) - 104px); }
-}
-.sign-logo {
-  width: 88px;
-  height: 88px;
-  flex: none;
-  border-radius: 50%;
-  box-shadow: 0 0 0 3px var(--ink);
-}
-.sign h1 {
-  margin: 0;
-  font: 700 28px/1.05 var(--serif);
-  font-variation-settings: 'opsz' 72;
-  letter-spacing: -0.01em;
-}
-.sign p { margin: 6px 0 0; font-size: 15px; }
+.sign-logo { width: 96px; height: 96px; flex: none; object-fit: contain; }
+.sign-text { flex: 1 1 auto; max-width: 440px; }
+.sign h1 { margin: 0; font-size: 24px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
+.sign p { margin: 4px 0 0; font-size: 14px; font-weight: 500; }
 
 /* ---------- Arama + kategoriler (yapışkan) ---------- */
 .toolbar {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--paper);
+  background: var(--cream);
+  padding-top: 12px;
   border-bottom: 1px solid var(--line);
-  padding: 12px 0 0;
 }
-.toolbar > * { max-width: var(--page); margin-inline: auto; }
+.toolbar > * { max-width: calc(var(--page) - 32px); margin-inline: auto; }
 .search {
   display: flex;
   align-items: center;
   gap: 10px;
   height: 48px;
-  margin: 0 16px;
+  margin-inline: 16px;
   padding: 0 14px;
-  border-radius: 12px;
-  background: #F6F2EF;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
 }
 @media (min-width: 672px) { .search { margin-inline: auto; } }
 .search svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
@@ -96,12 +81,12 @@ button { font: inherit; color: inherit; }
   height: 100%;
   border: 0;
   background: transparent;
-  font: 400 16px var(--sans); /* 16px: iOS yakınlaştırmasını önler */
+  font: 400 16px var(--font); /* 16px: iOS yakınlaştırmasını önler */
   color: var(--ink);
   outline: none;
 }
-.search:focus-within { box-shadow: 0 0 0 2px var(--salmon-ink); }
-.search input::placeholder { color: #94877F; }
+.search input::placeholder { color: #9A8D86; }
+.search:focus-within { border-color: var(--ink); }
 
 .chips {
   display: flex;
@@ -110,6 +95,7 @@ button { font: inherit; color: inherit; }
   padding: 10px 16px 12px;
   scrollbar-width: none;
 }
+@media (min-width: 672px) { .chips { padding-inline: 0; } }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
   flex: none;
@@ -118,6 +104,7 @@ button { font: inherit; color: inherit; }
   min-height: 40px;
   padding: 0 16px;
   border-radius: 999px;
+  background: var(--white);
   border: 1px solid var(--line);
   color: var(--ink);
   text-decoration: none;
@@ -125,59 +112,86 @@ button { font: inherit; color: inherit; }
   font-size: 14px;
   white-space: nowrap;
 }
-.chip.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.chip.active { background: var(--ink); border-color: var(--ink); color: var(--white); }
 .chip[hidden] { display: none; }
 
 /* ---------- Liste ---------- */
 main { max-width: var(--page); margin: 0 auto; padding: 0 16px; }
-.hint { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+.hint { margin: 14px 0 0; color: var(--muted); font-size: 13px; }
 
-.category { padding-top: 22px; scroll-margin-top: var(--toolbar-h); }
-.category h2 {
-  margin: 0 0 4px;
-  font: 650 22px/1.2 var(--serif);
-  font-variation-settings: 'opsz' 40;
-}
-.dish-list { list-style: none; margin: 0; padding: 0; }
-.dish-list > li + li { border-top: 1px solid var(--line); }
+.category { padding-top: 20px; scroll-margin-top: var(--toolbar-h); }
+.category-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.category-head h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; }
+.category-head span { color: var(--muted); font-size: 13px; }
 
+.dish-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .dish {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 14px;
-  padding: 16px 0;
-  border: 0;
-  background: none;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
   text-align: left;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: border-color .15s;
 }
-.dish:active { background: #FBF7F5; }
-.dish-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.dish-name { font: 600 18px/1.25 var(--serif); font-variation-settings: 'opsz' 24; }
+.dish:active { border-color: var(--salmon); }
+@media (hover: hover) { .dish:hover { border-color: var(--salmon); } }
+.dish-photo {
+  width: 112px;
+  height: 112px;
+  flex: none;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--salmon-soft);
+}
+.dish-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 2px 2px 0 0; }
+.dish-name { font-size: 16px; font-weight: 600; line-height: 1.3; }
 .dish-desc {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.dish-facts { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: 4px; }
-.price { font-weight: 600; font-size: 17px; font-variant-numeric: tabular-nums; }
-.price small { font-weight: 400; font-size: 13px; color: var(--muted); }
-.price-alt { font-size: 14px; color: var(--muted); }
-.price-ask { font-weight: 400; font-size: 14px; color: var(--muted); }
-.kcal { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.dish-allergens { font-size: 13px; color: var(--salmon-ink); }
-.dish-photo {
-  width: 104px;
-  height: 104px;
+.dish-allergens { display: flex; flex-wrap: wrap; gap: 4px; }
+.dish-allergens span {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--salmon-soft);
+  color: var(--salmon-ink);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.dish-facts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.dish-price { display: flex; flex-direction: column; }
+.price { font-size: 16px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.price small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.price-alt { font-size: 12px; color: var(--muted); }
+.price-ask { font-size: 13px; font-weight: 500; color: var(--muted); }
+.kcal {
   flex: none;
-  border-radius: 14px;
-  object-fit: cover;
+  padding: 3px 10px;
+  border-radius: 999px;
   background: var(--cream);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .empty { padding: 40px 0; text-align: center; color: var(--muted); }
@@ -186,20 +200,20 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 16px; }
   padding: 0 18px;
   border-radius: 999px;
   border: 1px solid var(--ink);
-  background: none;
+  background: var(--white);
   font-weight: 500;
   cursor: pointer;
 }
 
 .footer {
   max-width: var(--page);
-  margin: 32px auto 0;
+  margin: 28px auto 0;
   padding: 20px 16px calc(32px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
-.footer p { margin: 0 0 8px; max-width: 60ch; }
+.footer p { margin: 0 0 8px; max-width: 62ch; }
 
 /* ---------- Detay penceresi (alttan açılır) ---------- */
 .sheet {
@@ -209,23 +223,21 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 16px; }
   margin: auto auto 0;
   padding: 0;
   border: 0;
-  border-radius: 20px 20px 0 0;
-  background: var(--paper);
+  border-radius: 22px 22px 0 0;
+  background: var(--white);
   color: var(--ink);
   overflow: hidden;
 }
-.sheet::backdrop { background: rgb(34 26 24 / 0.45); }
+.sheet::backdrop { background: rgb(30 23 22 / 0.5); }
 .sheet[open] { animation: sheet-in 220ms cubic-bezier(.2,.8,.2,1); }
 .sheet[open]::backdrop { animation: fade-in 220ms ease-out; }
 .sheet.closing { animation: sheet-out 180ms ease-in forwards; }
 @keyframes sheet-in { from { transform: translateY(100%); } }
 @keyframes sheet-out { to { transform: translateY(100%); } }
 @keyframes fade-in { from { opacity: 0; } }
-@media (min-width: 680px) {
-  .sheet { margin: auto; border-radius: 20px; max-height: 88dvh; }
-}
+@media (min-width: 680px) { .sheet { margin: auto; border-radius: 22px; max-height: 88dvh; } }
 .sheet-body { position: relative; max-height: inherit; overflow-y: auto; overscroll-behavior: contain; }
-.sheet-photo { width: 100%; aspect-ratio: 16 / 9; max-height: 30dvh; object-fit: cover; background: var(--cream); }
+.sheet-photo { width: 100%; aspect-ratio: 16 / 9; max-height: 32dvh; object-fit: cover; background: var(--salmon-soft); }
 .sheet-close {
   position: absolute;
   top: 12px;
@@ -236,47 +248,42 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 16px; }
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: rgb(255 255 255 / 0.92);
+  background: var(--white);
+  box-shadow: 0 1px 4px rgb(30 23 22 / 0.18);
   cursor: pointer;
 }
 .sheet-close svg { width: 20px; height: 20px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
 .sheet-content { padding: 18px 20px calc(28px + env(safe-area-inset-bottom)); }
 .sheet-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.sheet-head h2 { margin: 0; font: 650 26px/1.15 var(--serif); font-variation-settings: 'opsz' 48; }
-.sheet-price { margin: 0; font-weight: 600; font-size: 19px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.sheet-price.price-ask { font-size: 15px; font-weight: 400; color: var(--muted); }
+.sheet-head h2 { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.2; }
+.sheet-price { margin: 0; font-size: 19px; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sheet-price.price-ask { font-size: 14px; font-weight: 500; color: var(--muted); }
 .muted { color: var(--muted); margin: 6px 0 0; }
-.small { font-size: 13px; }
+.small { font-size: 12px; }
 
-.block { margin-top: 22px; }
-.block h3 { margin: 0 0 8px; font-size: 16px; font-weight: 600; }
+.block { margin-top: 20px; }
+.block h3 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
 
 .nutrition { background: var(--cream); border-radius: 16px; padding: 16px; }
-.kcal-big { margin: 0; font-size: 15px; }
-.kcal-big strong { font: 700 34px/1 var(--serif); font-variation-settings: 'opsz' 72; font-variant-numeric: tabular-nums; }
-.kcal-big span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
-.macros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0 0; }
+.kcal-big { margin: 0; font-size: 14px; font-weight: 500; }
+.kcal-big strong { font-size: 32px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.kcal-big span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 400; }
+.macros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--cream-deep); }
 .macros div { display: flex; flex-direction: column-reverse; }
-.macros dt { color: var(--muted); font-size: 13px; }
-.macros dd { margin: 0; font-weight: 600; font-size: 16px; font-variant-numeric: tabular-nums; }
+.macros dt { color: var(--muted); font-size: 12px; }
+.macros dd { margin: 0; font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; }
 
 .allergen-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
-.allergen-tags li {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #FBE9E7;
-  color: var(--salmon-ink);
-  font-weight: 500;
-  font-size: 14px;
-}
+.allergen-tags li { padding: 6px 12px; border-radius: 999px; background: var(--salmon-soft); color: var(--salmon-ink); font-weight: 500; font-size: 13px; }
 
 .ingredients { list-style: none; margin: 0; padding: 0; }
-.ingredients li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.ingredients li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
 .ingredients li:last-child { border-bottom: 0; }
 .ingredients .amount { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.ingredients .group { display: block; padding-top: 16px; border-bottom: 0; font-weight: 600; color: var(--salmon-ink); font-size: 14px; }
+.ingredients .group { display: block; padding-top: 16px; border-bottom: 0; font-weight: 600; color: var(--salmon-ink); font-size: 13px; }
 .ingredients li:first-child.group { padding-top: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .sheet[open], .sheet[open]::backdrop, .sheet.closing { animation: none; }
+  .dish { transition: none; }
 }
