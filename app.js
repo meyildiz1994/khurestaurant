@@ -252,25 +252,57 @@ function renderChips() {
 }
 
 // Highlight the chip of the category currently on screen.
-let observer;
+const toolbar = document.querySelector('.toolbar');
+let lockedTarget = null;
+let lockTimer;
 function setActiveChip(id) {
   chipsEl.querySelectorAll('.chip').forEach(chip => {
     const active = chip.dataset.target === id;
     chip.classList.toggle('active', active);
-    if (active) chip.setAttribute('aria-current','true'); else chip.removeAttribute('aria-current');
+    if (active) {
+      chip.setAttribute('aria-current','true');
+      const left = chip.offsetLeft - (chipsEl.clientWidth - chip.offsetWidth) / 2;
+      chipsEl.scrollTo({ left, behavior: 'smooth' });
+    } else chip.removeAttribute('aria-current');
   });
 }
-function observeSections() {
-  observer?.disconnect();
+function currentSectionId() {
   const sections = [...document.querySelectorAll('.category')];
-  if (!sections.length) return;
-  setActiveChip(sections[0].id);
-  observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (visible[0]) setActiveChip(visible[0].target.id);
-  }, { rootMargin: '-140px 0px -60% 0px' });
-  sections.forEach(section => observer.observe(section));
+  if (!sections.length) return null;
+  const line = toolbar.getBoundingClientRect().bottom + 24;
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= line) current = section;
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  if (atBottom && sections.at(-1).getBoundingClientRect().top < window.innerHeight) current = sections.at(-1);
+  return current.id;
 }
+let ticking = false;
+function updateActiveChip() {
+  if (lockedTarget) return;
+  const id = currentSectionId();
+  if (id && !chipsEl.querySelector(`.chip.active[data-target="${id}"]`)) setActiveChip(id);
+}
+window.addEventListener('scroll', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { ticking = false; updateActiveChip(); });
+}, { passive: true });
+function releaseLock() { lockedTarget = null; clearTimeout(lockTimer); }
+window.addEventListener('scrollend', () => { if (lockedTarget) { releaseLock(); } });
+chipsEl.addEventListener('click', event => {
+  const chip = event.target.closest('.chip');
+  if (!chip) return;
+  event.preventDefault();
+  const section = document.getElementById(chip.dataset.target);
+  if (!section) return;
+  lockedTarget = chip.dataset.target;
+  setActiveChip(lockedTarget);
+  clearTimeout(lockTimer);
+  lockTimer = setTimeout(releaseLock, 1200); // scrollend desteklemeyen tarayıcılar için
+  const top = section.getBoundingClientRect().top + window.scrollY - toolbar.offsetHeight + 1;
+  window.scrollTo({ top, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+function observeSections() { releaseLock(); updateActiveChip(); }
 
 // ---------- Detail sheet ----------
 function sheetMarkup(dish) {
