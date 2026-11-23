@@ -143,3 +143,4 @@ body{background:var(--paper);color:var(--ink)}
 .price-options>span{background:#f3d8d4;color:#9e443f;font-size:9px;padding:3px 6px}
 @media(max-width:620px){.dish-row{min-height:96px;padding:8px;gap:10px}.dish-thumb{width:74px;height:74px}.dish-title b{font-size:13px}.dish-ingredients{font-size:9px}.card-price{font-size:11px}.card-kcal{font-size:8px}}
 @media(max-width:360px){.header-center small{display:none}.header-center strong{white-space:normal;font-size:7px}.header-copy small{letter-spacing:.05em}}
+.ingredient-list li b.amount-pending{color:#9a8a87;font-weight:500;font-style:italic}
