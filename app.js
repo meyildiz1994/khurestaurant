@@ -251,26 +251,73 @@ function renderChips() {
   ).join('');
 }
 
-// Highlight the chip of the category currently on screen.
-let observer;
+// ---------- Category tabs ----------
+// The last section is given enough height (CSS) that every section can scroll to just under the
+// sticky toolbar, so "the last section whose top has passed the toolbar" is always the right tab.
+const toolbar = document.querySelector('.toolbar');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let pendingTarget = null;   // set while a tab-triggered scroll is running
+let pendingTimer;
+
+function toolbarBottom() { return toolbar.getBoundingClientRect().bottom; }
+function syncToolbarHeight() {
+  document.documentElement.style.setProperty('--toolbar-h', `${Math.round(toolbar.offsetHeight)}px`);
+}
 function setActiveChip(id) {
   chipsEl.querySelectorAll('.chip').forEach(chip => {
     const active = chip.dataset.target === id;
+    if (chip.classList.contains('active') === active) return;
     chip.classList.toggle('active', active);
-    if (active) chip.setAttribute('aria-current','true'); else chip.removeAttribute('aria-current');
+    if (active) {
+      chip.setAttribute('aria-current','true');
+      const left = chip.offsetLeft - (chipsEl.clientWidth - chip.offsetWidth) / 2;
+      chipsEl.scrollTo({ left, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    } else chip.removeAttribute('aria-current');
   });
 }
-function observeSections() {
-  observer?.disconnect();
+function sectionAtToolbar() {
   const sections = [...document.querySelectorAll('.category')];
-  if (!sections.length) return;
-  setActiveChip(sections[0].id);
-  observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (visible[0]) setActiveChip(visible[0].target.id);
-  }, { rootMargin: '-140px 0px -60% 0px' });
-  sections.forEach(section => observer.observe(section));
+  if (!sections.length) return null;
+  const line = toolbarBottom() + 8;
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= line) current = section;
+  return current.id;
 }
+function finishPending() { pendingTarget = null; clearTimeout(pendingTimer); }
+function onScroll() {
+  if (pendingTarget) {
+    const section = document.getElementById(pendingTarget);
+    // Done when the target sits under the toolbar (or can't move further).
+    if (!section || Math.abs(section.getBoundingClientRect().top - toolbarBottom()) < 3) finishPending();
+    else return;
+  }
+  const id = sectionAtToolbar();
+  if (id) setActiveChip(id);
+}
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { ticking = false; onScroll(); });
+}, { passive: true });
+// A finger or wheel on the page cancels a tab-triggered scroll: follow the user from there.
+['touchstart','wheel','keydown'].forEach(type => window.addEventListener(type, () => { if (pendingTarget) { finishPending(); } }, { passive: true }));
+window.addEventListener('resize', () => { syncToolbarHeight(); onScroll(); });
+
+chipsEl.addEventListener('click', event => {
+  const chip = event.target.closest('.chip');
+  if (!chip) return;
+  event.preventDefault();
+  const section = document.getElementById(chip.dataset.target);
+  if (!section) return;
+  pendingTarget = chip.dataset.target;
+  setActiveChip(pendingTarget);
+  clearTimeout(pendingTimer);
+  pendingTimer = setTimeout(() => { finishPending(); onScroll(); }, 2500);
+  const top = section.getBoundingClientRect().top + window.scrollY - toolbar.offsetHeight;
+  window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+});
+function observeSections() { finishPending(); syncToolbarHeight(); onScroll(); }
 
 // ---------- Detail sheet ----------
 function sheetMarkup(dish) {
