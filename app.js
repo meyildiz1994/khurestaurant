@@ -189,13 +189,13 @@ function rowMarkup(dish) {
   const allergens = dish.allergens.map(name => shortAllergen[name] || name);
   return `<li>
     <button class="dish" type="button" data-id="${dish.id}">
-      <img class="dish-photo" src="${imageSrc(dish)}" alt="" width="112" height="112" loading="lazy" decoding="async" />
+      <img class="dish-photo" src="${imageSrc(dish)}" alt="" width="96" height="96" loading="lazy" decoding="async" />
       <span class="dish-text">
         <span class="dish-name">${escapeHTML(dish.name)}</span>
         <span class="dish-desc">${escapeHTML(previewText(dish))}</span>
-        ${allergens.length ? `<span class="dish-allergens">${allergens.map(name => `<span>${escapeHTML(name)}</span>`).join('')}</span>` : ''}
-        <span class="dish-facts">
+        <span class="dish-meta">
           <span class="kcal">${kcal ? `${escapeHTML(kcal)} kcal` : 'Kalori hazırlanıyor'}</span>
+          ${allergens.length ? `<span class="allergen-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>Alerjen: ${escapeHTML(allergens.join(', ').toLocaleLowerCase('tr'))}</span>` : ''}
         </span>
       </span>
     </button>
