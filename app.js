@@ -31,12 +31,14 @@ const dishes = [
   {id:'bicak-arasi',name:'Bıçak Arası',category:'Pide & Fırın',emoji:'⌁',portion:'',recipeComplete:true,ingredients:[['Et','100 g'],['Domates','90 g'],['Biber','40 g'],['Kavram yağı','50 g'],['Tuz','5 g'],['Sıvı yağ','10 g'],['Hamur','200 g']]},
   {id:'mevlana',name:'Mevlana',category:'Pide & Fırın',emoji:'⌁',portion:'',recipeComplete:true,ingredients:[['Kıyma','100 g'],['Peynir','30 g'],['Domates','90 g'],['Biber','40 g'],['Soğan','35 g'],['Hamur','200 g'],['Tuz','5 g']]},
   {id:'lahmacun',name:'Lahmacun',category:'Pide & Fırın',emoji:'⌁',portion:'',recipeComplete:true,ingredients:[['Kıyma','120 g'],['Domates','90 g'],['Biber','40 g'],['Soğan','35 g'],['Sarımsak','5 g'],['İsot','10 g'],['Maydanoz','10 g'],['Tuz','5 g'],['Hamur','55 g']]},
-  {id:'kasarli-pide',name:'Kaşarlı Pide',category:'Pide & Fırın',emoji:'⌁',portion:'',recipeComplete:false,ingredients:[['Hamur',''],['Kaşar','']]},
-  {id:'peynirli-pide',name:'Peynirli Pide (Börek)',category:'Pide & Fırın',emoji:'⌁',portion:'',recipeComplete:false,ingredients:[['Peynir','120 g'],['Kaşar','40 g'],['Küflü peynir','25 g'],['Hamur','']]},
+  {id:'peynirli-pide',name:'Börek',category:'Pide & Fırın',emoji:'⌁',portion:'',recipeComplete:false,ingredients:[['Peynir','120 g'],['Kaşar','40 g'],['Küflü peynir','25 g'],['Hamur','']]},
   {id:'bamya',name:'Bamya',category:'Çorba & Başlangıç',emoji:'◒',portion:'200 g pişmiş servis',recipeComplete:true,ingredients:[['Bamya','30 g'],['Et','30 g'],['Soğan','10 g'],['Salça sos','10 g'],['Tuz','5 g'],['Limon kabuğu','2 g'],['Sıvı yağ','10 g'],['Biber salçası','5 g'],['Kapya biber','10 g']]},
   {id:'kelle-paca',name:'Kelle Paça',category:'Çorba & Başlangıç',emoji:'◒',portion:'',recipeComplete:true,ingredients:[['Dana kelle eti','100 g'],['Tereyağı','18 g'],['Sıvı yağ','5 g'],['Un','5 g'],['Yoğurt','30 g'],['Limon','4 g'],['Yumurta sarısı','5 g'],['Tuz','3 g']]},
   {id:'mercimek',name:'Mercimek',category:'Çorba & Başlangıç',emoji:'◒',portion:'1 kase (~250 g)',recipeComplete:true,ingredients:[['Mercimek','37,5 g'],['Un','12,5 g'],['Tuz','7,5 g'],['Su','187,5 g'],['Sıvı yağ','7,5 g']]},
-  {id:'icli-kofte',name:'İçli Köfte',category:'Çorba & Başlangıç',emoji:'◒',portion:'80 g pişmiş servis',recipeComplete:false,ingredients:[['Bulgur',''],['Kıyma','']]}
+  {id:'icli-kofte',name:'İçli Köfte',category:'Çorba & Başlangıç',emoji:'◒',portion:'1 adet',recipeComplete:true,ingredients:[
+    ['Kıyma','70 g','İç harcı'],['Yağ','10 g','İç harcı'],['Soğan','5 g','İç harcı'],['Tuz','3 g','İç harcı'],['Karabiber','1 g','İç harcı'],['Ceviz','20 g','İç harcı'],
+    ['İnce bulgur','17 g','Dış hamuru'],['İrmik','5 g','Dış hamuru'],['Un','5 g','Dış hamuru'],['Pul biber','1,4 g','Dış hamuru'],['Biber salçası','5 g','Dış hamuru'],['Yumurta','2,5 g','Dış hamuru']
+  ]}
 ];
 
 // Per-100 g edible-portion values: [kcal, protein g, fat g, carbohydrate g, fibre g].
@@ -79,6 +81,10 @@ const nutrientReference = {
   eggYolk:[308,14.75,27.62,0,0],         // TürKomp: Yumurta, tavuk, sarı
   lentils:[322,25.81,1.57,41.94,18.67],  // TürKomp: Mercimek, kırmızı, kuru
   bulgur:[357,12.08,3.95,64.97,6.79],    // TürKomp: Bulgur, pilavlık
+  walnut:[654,15.23,65.21,13.71,6.7],    // USDA 12155 Walnuts, English (TürKomp'a erişilemedi)
+  blackPepper:[251,10.39,3.26,63.95,25.3],// USDA 02030 Spices, pepper, black
+  semolina:[360,12.68,1.05,72.83,3.9],   // USDA 20083 Semolina, enriched
+  egg:[143,12.56,9.51,.72,0],            // USDA 01123 Egg, whole, raw
   water:[0,0,0,0,0]
 };
 // Minced meat = lean meat + tail fat, mixed so that total fat equals MINCE_FAT_PERCENT.
@@ -100,12 +106,13 @@ const ingredientReference = {
   'Tavuk kanat (kemikli)':'chickenWingBoneIn','Sıvı yağ':'oil','Dana eti':'beefMeat','Et':'beefMeat','Kuzu kol (kemikli)':'lambShoulderBoneIn',
   'Domates':'tomato','Soğan':'onion','Sarımsak':'garlic','Maydanoz':'parsley','Peynir':'whiteCheese','Kaşar':'kasar','Kaşar peyniri':'kasar',
   'Küflü peynir':'blueCheese','Köfte':'kofteMix','Bamya':'okra','Limon kabuğu':'lemon','Biber salçası':'pepperPaste',
-  'Dana kelle eti':'beefHead','Un':'flour','Limon':'lemon','Yumurta sarısı':'eggYolk','Mercimek':'lentils','Su':'water','Bulgur':'bulgur'
+  'Dana kelle eti':'beefHead','Un':'flour','Limon':'lemon','Yumurta sarısı':'eggYolk','Mercimek':'lentils','Su':'water','Bulgur':'bulgur','İnce bulgur':'bulgur','Yağ':'oil','Karabiber':'blackPepper','Ceviz':'walnut','İrmik':'semolina','Yumurta':'egg'
 };
 const allergenReference = {
-  'Gluten içeren tahıllar (buğday)': new Set(['Ekmek','Hamur','Lavaş','Lavaş ekmeği','Pide','Un','Köfte','Bulgur']),
+  'Gluten içeren tahıllar (buğday)': new Set(['Ekmek','Hamur','Lavaş','Lavaş ekmeği','Pide','Un','Köfte','Bulgur','İnce bulgur','İrmik']),
   'Süt ve süt ürünleri': new Set(['Peynir','Kaşar','Kaşar peyniri','Küflü peynir','Yoğurt','Tereyağı']),
-  'Yumurta ve yumurta ürünleri': new Set(['Yumurta sarısı'])
+  'Yumurta ve yumurta ürünleri': new Set(['Yumurta sarısı','Yumurta']),
+  'Sert kabuklu meyveler (ceviz)': new Set(['Ceviz'])
 };
 function gramsOf(amount) {
   const text = String(amount);
@@ -139,32 +146,6 @@ for (const dish of dishes) {
   dish.note = 'NOT: Değerler laboratuvar analizi değildir.';
 }
 
-// Prices transcribed from the restaurant menu photos shared on 2026-11-19.
-// Items marked with an X in those photos are not part of the available menu.
-const priceLabels = {
-  adana: '₺470',
-  urfa: '₺470',
-  'ali-nazik': '₺510',
-  'yogurtlu-kebap': '₺510',
-  'patlican-kebap': '₺510',
-  'sarma-beyti': '₺490',
-  'saray-usulu-beyti': '₺510',
-  kofte: '₺430',
-  'tavuk-sis': '₺490',
-  kanat: '₺430',
-  'kiremitte-tavuk': '₺430',
-  'kiremitte-kanat': '₺450',
-  'kiremitte-kofte': '₺450',
-  'cop-sis': '₺800',
-  'etli-ekmek': '₺420',
-  'bicak-arasi': '₺480',
-  mevlana: '₺450',
-  lahmacun: '₺280',
-  'peynirli-pide': '₺400',
-  'icli-kofte': 'Tek ₺90 · Porsiyon ₺270'
-};
-for (const dish of dishes) dish.priceLabel = priceLabels[dish.id] ?? '';
-
 // Internal check only (not shown to customers): raw recipe total vs. stated cooked portion.
 for (const dish of dishes) {
   const portionGrams = Number(dish.portion.match(/([\d.]+)\s*g\b/)?.[1] || 0);
@@ -176,6 +157,7 @@ for (const dish of dishes) {
 const categories = [...new Set(dishes.map(dish => dish.category))];
 const categoryIds = Object.fromEntries(categories.map((name,index) => [name, `kategori-${index + 1}`]));
 const shortAllergen = {
+  'Sert kabuklu meyveler (ceviz)':'Ceviz',
   'Gluten içeren tahıllar (buğday)':'Gluten',
   'Süt ve süt ürünleri':'Süt',
   'Yumurta ve yumurta ürünleri':'Yumurta'
@@ -190,7 +172,6 @@ let query = '';
 function escapeHTML(value='') { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
 function imageSrc(dish) { return `assets/${dish.imageId || dish.id}.jpg`; }
 function kcalNumber(dish) { return dish.nutrition ? dish.nutrition[0][1].replace(/[~\s]|kcal/g,'') : null; }
-function priceText(dish) { return dish.priceLabel || 'Fiyatı sorunuz'; }
 function previewText(dish) {
   if (dish.cardDescription) return dish.cardDescription.replace(/ · /g, ', ');
   const names = [...new Set(dish.ingredients.map(([name]) => name.replace(' (kemikli)','')))]
@@ -206,9 +187,6 @@ function matches(dish, needle) {
 function rowMarkup(dish) {
   const kcal = kcalNumber(dish);
   const allergens = dish.allergens.map(name => shortAllergen[name] || name);
-  const price = dish.id === 'icli-kofte'
-    ? '<span class="price">₺90 <small>tek</small></span><span class="price-alt">₺270 porsiyon</span>'
-    : `<span class="price${dish.priceLabel ? '' : ' price-ask'}">${escapeHTML(priceText(dish))}</span>`;
   return `<li>
     <button class="dish" type="button" data-id="${dish.id}">
       <img class="dish-photo" src="${imageSrc(dish)}" alt="" width="112" height="112" loading="lazy" decoding="async" />
@@ -217,7 +195,6 @@ function rowMarkup(dish) {
         <span class="dish-desc">${escapeHTML(previewText(dish))}</span>
         ${allergens.length ? `<span class="dish-allergens">${allergens.map(name => `<span>${escapeHTML(name)}</span>`).join('')}</span>` : ''}
         <span class="dish-facts">
-          <span class="dish-price">${price}</span>
           <span class="kcal">${kcal ? `${escapeHTML(kcal)} kcal` : 'Kalori hazırlanıyor'}</span>
         </span>
       </span>
@@ -327,7 +304,6 @@ function sheetMarkup(dish) {
   const portion = dish.portion
     ? dish.portion
     : (dish.recipeComplete && dish.recipeTotalGrams ? `Tarif toplamı yaklaşık ${Math.round(dish.recipeTotalGrams)} g (pişirme öncesi)` : '');
-  const price = dish.id === 'icli-kofte' ? 'Tek ₺90, porsiyon ₺270' : priceText(dish);
 
   let previous = '';
   const ingredients = dish.ingredients.map(([name,amount,component]) => {
@@ -346,13 +322,12 @@ function sheetMarkup(dish) {
     <div class="sheet-content">
       <div class="sheet-head">
         <h2 id="sheet-title">${escapeHTML(dish.name)}</h2>
-        <p class="sheet-price${dish.priceLabel || dish.id === 'icli-kofte' ? '' : ' price-ask'}">${escapeHTML(price)}</p>
       </div>
       ${portion ? `<p class="muted">${escapeHTML(portion)}</p>` : ''}
 
       <section class="block nutrition">
         ${kcal
-          ? `<p class="kcal-big"><strong>${escapeHTML(kcal)}</strong> kcal <span>1 porsiyon, yaklaşık</span></p><dl class="macros">${macros}</dl>`
+          ? `<p class="kcal-big"><strong>${escapeHTML(kcal)}</strong> kcal <span>${dish.portion === '1 adet' ? '1 adet' : '1 porsiyon'}, yaklaşık</span></p><dl class="macros">${macros}</dl>`
           : `<p class="muted">Tarif tamamlanınca kalori ve besin değerleri burada görünecek.</p>`}
       </section>
 
