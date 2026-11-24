@@ -1,5 +1,5 @@
 const dishes = [
-  {id:'adana',name:'Adana Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','48 g'],['Kuzu kıyma','49 g'],['Kuyruk yağı','20 g'],['Pul biber','2 g'],['Tuz','3 g'],['Kapya biber','10 g']]},
+  {id:'adana',name:'Adana Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Pul biber','2 g'],['Tuz','3 g'],['Kapya biber','10 g']]},
   {id:'urfa',name:'Urfa Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'150 g pişmiş servis',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g']]},
   {id:'ali-nazik',name:'Ali Nazik',category:'Kebap & Izgara',emoji:'♨',portion:'',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g'],['Tereyağı','20 g'],['Domates sosu','30 g'],['Patlıcan','100 g'],['Yoğurt','100 g']]},
   {id:'yogurtlu-kebap',name:'Yoğurtlu Kebap',category:'Kebap & Izgara',emoji:'♨',portion:'',recipeComplete:true,ingredients:[['Dana kıyma','58 g'],['Kuzu kıyma','59 g'],['Kuyruk yağı','20 g'],['Kapya biber','10 g'],['Tuz','3 g'],['Tereyağı','20 g'],['Domates sosu','30 g'],['Pide','120 g'],['Yoğurt','100 g']]},
@@ -12,7 +12,7 @@ const dishes = [
     ['Kuzu kol','62,5 g','Yarım Tandır'],['Tuz','2,5 g','Yarım Tandır']
   ]},
   {id:'karisik-izgara',name:'Karışık Izgara',category:'Kebap & Izgara',emoji:'♨',portion:'',cardDescription:'Yarım Adana · Yarım Lahmacun · Yarım Tavuk Şiş · Yarım Kanat · Yarım Köfte · Yarım Patlıcan Kebap',recipeComplete:true,ingredients:[
-    ['Dana kıyma','24 g','Yarım Adana'],['Kuzu kıyma','24,5 g','Yarım Adana'],['Kuyruk yağı','10 g','Yarım Adana'],['Pul biber','1 g','Yarım Adana'],['Tuz','1,5 g','Yarım Adana'],['Kapya biber','5 g','Yarım Adana'],
+    ['Dana kıyma','29 g','Yarım Adana'],['Kuzu kıyma','29,5 g','Yarım Adana'],['Kuyruk yağı','10 g','Yarım Adana'],['Pul biber','1 g','Yarım Adana'],['Tuz','1,5 g','Yarım Adana'],['Kapya biber','5 g','Yarım Adana'],
     ['Kıyma','60 g','Yarım Lahmacun'],['Domates','45 g','Yarım Lahmacun'],['Biber','20 g','Yarım Lahmacun'],['Soğan','17,5 g','Yarım Lahmacun'],['Sarımsak','2,5 g','Yarım Lahmacun'],['İsot','5 g','Yarım Lahmacun'],['Maydanoz','5 g','Yarım Lahmacun'],['Tuz','2,5 g','Yarım Lahmacun'],['Hamur','27,5 g','Yarım Lahmacun'],
     ['Tavuk but','111 g','Yarım Tavuk Şiş'],['Domates salçası','5 g','Yarım Tavuk Şiş'],['Sıvı yağ','2,5 g','Yarım Tavuk Şiş'],['Toz biber','2,5 g','Yarım Tavuk Şiş'],['Tuz','2,5 g','Yarım Tavuk Şiş'],['Pul biber','1,5 g','Yarım Tavuk Şiş'],
     ['Tavuk kanat (kemikli)','111 g','Yarım Kanat'],['Domates salçası','5 g','Yarım Kanat'],['Pul biber','1,5 g','Yarım Kanat'],['Tuz','2,5 g','Yarım Kanat'],['Sıvı yağ','2,5 g','Yarım Kanat'],['Toz biber','2,5 g','Yarım Kanat'],
