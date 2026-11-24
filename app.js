@@ -173,7 +173,7 @@ const sheetBody = document.querySelector('#sheet-body');
 let query = '';
 
 function escapeHTML(value='') { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
-function imageSrc(dish) { return `assets/${dish.id}.jpg?v=2`; }
+function imageSrc(dish) { return `assets/${dish.id}.jpg?v=3`; }
 function kcalNumber(dish) { return dish.nutrition ? dish.nutrition[0][1].replace(/[~\s]|kcal/g,'') : null; }
 function previewText(dish) {
   if (dish.cardDescription) return dish.cardDescription.replace(/ · /g, ', ');
